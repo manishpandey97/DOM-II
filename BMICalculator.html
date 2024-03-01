@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMICalculator</title>
+    <style>
+        #container{
+            margin: auto;
+            width: 45%;
+            margin-top: 15vh;
+            text-align: center;
+            border-radius:10px ;
+            padding: 20px;
+            background-color: beige;
+            box-shadow: 2px 2px 5px lightslategray;
+        }
+        #container p,label{
+           color: rgb(122, 145, 54);
+           font-size: 20px;
+        }
+        #container h1{
+           color: aqua;
+        }
+        #container h2{
+           color: brown;
+        }
+        #container input{
+            margin: 10px;
+           color: brown;
+           outline: 1px solid azure;
+           font-size: 15px;
+        }
+        #container button{
+            background-color: lawngreen;
+            font-size: large;
+            margin: 5px;
+            border-radius: 5px;
+           color: white;
+          padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Check Your BMI</h1>
+        <p> Enter your weight and height below to check  your BMI results</p>
+        <label for="">Put your weight in here (KG)</label>
+        <input type="number" name="inputweight" id="inputweight" placeholder="120">
+<br>
+        <label for="">And your height in here (M)</label>
+        <input type="number" name="inputweight" id="inputheight" placeholder="1.2">
+        <br>
+        <button>Calculate BMI</button>
+        <!-- <h2> your BMI is 20 which means you are Normal Weight</h2> -->
+    </div>
+</body>
+<script>
+    document.querySelector('button').addEventListener('click',function(){
+        // first check element hr & h2 tag is present then remove that element
+        if( document.querySelector('div').contains(document.querySelector('hr')) ||
+        document.querySelector('div').contains(document.querySelector('h2')) ){
+            document.querySelector('hr').remove();
+            document.querySelector('h2').remove();
+        }
+        // creating hr and h2 tag
+        let  hr=document.createElement('hr');
+        let  h2=document.createElement('h2');
+        // calculating bmi and append child
+        let weight=document.getElementById('inputweight').value;
+        let height=document.getElementById('inputheight').value;
+        if(weight !='' && height!=''){ 
+           bmi= Number(weight/(height*height)).toFixed(1);
+
+        // then check condition and append element
+            if(bmi <=18.4){
+                h2.textContent=
+                `Your BMI is ${bmi} which means You are UnderWeight`;
+              document.querySelector('div').append(hr,h2);
+            }else if(bmi>=18.5 && bmi <=24.9){
+                h2.textContent=
+                `Your BMI is ${bmi} which means You are Normal Weight`;
+                document.querySelector('div').append(hr,h2);
+            }else if(bmi>=25 && bmi<=29.9){
+                h2.textContent=
+                `Your BMI is ${bmi} which means You are OverWeight`;
+                document.querySelector('div').append(hr,h2);
+            }else{
+                h2.textContent=
+                `Your BMI is ${bmi} which means You are Obese`;
+                document.querySelector('div').append(hr,h2);
+            }
+        }else{
+            alert("please enter your Weight and Height");
+        }
+    })
+    
+</script>
+</html>
